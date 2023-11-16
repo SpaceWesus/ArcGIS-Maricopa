@@ -13,7 +13,7 @@ using System;
 
 [ExecuteAlways]
 
-public class TestScene : MonoBehaviour
+public class maricopaCountyArcGIS: MonoBehaviour
 {
     // API key used to get access to the Data from the SDK
     public string APIKey = "AAPK124a6069bbe1497c806a907a6ebc42eeqwAS8w-XQD9yDIOJ4GfulEXoFXSDjroT9poO_XqDuzPOmmQhA8pu3zrwz3zqmYqL";
@@ -26,14 +26,9 @@ public class TestScene : MonoBehaviour
      * component attached.
        In this tutorial, use the following values for the Origin Position for New York City.*/
 
-    // New York City values
+    // Maricopa County values
     private ArcGISMapComponent arcGISMapComponent;
-    private ArcGISPoint geographicCoordinates = new ArcGISPoint(-74.054921, 40.691242, 3000, ArcGISSpatialReference.WGS84());
-
-    // Numbers from RIT Video
-    // Rochester Ontario Lake
-    // Long, Lat, Alt
-    // -77.735482, 43.331219, 10
+    private ArcGISPoint geographicCoordinates = new ArcGISPoint(-112.0676939844843, 33.452266887500514, 20000, ArcGISSpatialReference.WGS84());
 
     /*ArcGIS Camera will load better LODs for areas closer to the view and lower LODs for the areas that are 
      * further away. Set up a Camera component variable under the main class: */
@@ -81,7 +76,7 @@ public class TestScene : MonoBehaviour
         arcGISMap.Elevation = new Esri.GameEngine.Map.ArcGISMapElevation(new Esri.GameEngine.Elevation.ArcGISImageElevationSource("https://elevation3d.arcgis.com/arcgis/rest/services/WorldElevation3D/Terrain3D/ImageServer", "Terrain 3D", ""));
 
         // addition of the image layers for the map. Think of it like when you zoom into google maps and you see the tiling. These are essentially NYCs textures from above.
-        var layer_1 = new Esri.GameEngine.Layers.ArcGISImageLayer("https://tiles.arcgis.com/tiles/nGt4QxSblgDfeJn9/arcgis/rest/services/UrbanObservatory_NYC_TransitFrequency/MapServer", "MyLayer_1", 1.0f, true, "");
+        /*var layer_1 = new Esri.GameEngine.Layers.ArcGISImageLayer("https://tiles.arcgis.com/tiles/nGt4QxSblgDfeJn9/arcgis/rest/services/UrbanObservatory_NYC_TransitFrequency/MapServer", "MyLayer_1", 1.0f, true, "");
         arcGISMap.Layers.Add(layer_1);
 
         var layer_2 = new Esri.GameEngine.Layers.ArcGISImageLayer("https://tiles.arcgis.com/tiles/nGt4QxSblgDfeJn9/arcgis/rest/services/New_York_Industrial/MapServer", "MyLayer_2", 1.0f, true, "");
@@ -89,17 +84,19 @@ public class TestScene : MonoBehaviour
 
         var layer_3 = new Esri.GameEngine.Layers.ArcGISImageLayer("https://tiles.arcgis.com/tiles/4yjifSiIG17X0gW4/arcgis/rest/services/NewYorkCity_PopDensity/MapServer", "MyLayer_3", 1.0f, true, "");
         arcGISMap.Layers.Add(layer_3);
+        */
 
         // Same thing as the image layers, but these are the 3d buildings that are loaded in when you zoom in enough.
-        var buildingLayer = new Esri.GameEngine.Layers.ArcGIS3DObjectSceneLayer("https://tiles.arcgis.com/tiles/P3ePLMYs2RVChkJx/arcgis/rest/services/Buildings_NewYork_17/SceneServer", "Building Layer", 1.0f, true, "");
+        var buildingLayer = new Esri.GameEngine.Layers.ArcGIS3DObjectSceneLayer("https://basemaps3d.arcgis.com/arcgis/rest/services/OpenStreetMap3D_Buildings_v1/SceneServer", "Building Layer", 1.0f, true, "");
         arcGISMap.Layers.Add(buildingLayer);
+        
 
         /* Use ArcGISExtentCircle in the CreateArcGISMap() method to set up a circular extent. The code below 
          * will create a circle extent based on the parameter values and attach it to the map's clipping area.*/
         arcGISMapComponent.EnableExtent = true;
 
-        var extentCenter = new Esri.GameEngine.Geometry.ArcGISPoint(-74.054921, 40.691242, 3000, ArcGISSpatialReference.WGS84());
-        var extent = new ArcGISExtentCircle(extentCenter, 10000);
+        var extentCenter = new Esri.GameEngine.Geometry.ArcGISPoint(-112.0676939844843, 33.452266887500514, 20000, ArcGISSpatialReference.WGS84());
+        var extent = new ArcGISExtentCircle(extentCenter, 40000);
 
         arcGISMap.ClippingArea = extent;
         /* If you want to configure a rectangular extent, use ArcGISExtentRectangle instead of 
