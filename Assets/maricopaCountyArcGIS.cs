@@ -28,7 +28,7 @@ public class maricopaCountyArcGIS: MonoBehaviour
 
     // Maricopa County values
     private ArcGISMapComponent arcGISMapComponent;
-    private ArcGISPoint geographicCoordinates = new ArcGISPoint(-112.0676939844843, 33.452266887500514, 20000, ArcGISSpatialReference.WGS84());
+    private ArcGISPoint geographicCoordinates = new ArcGISPoint(-112.0676939844843, 33.452266887500514, 25000, ArcGISSpatialReference.WGS84());
 
     /*ArcGIS Camera will load better LODs for areas closer to the view and lower LODs for the areas that are 
      * further away. Set up a Camera component variable under the main class: */
@@ -95,7 +95,7 @@ public class maricopaCountyArcGIS: MonoBehaviour
          * will create a circle extent based on the parameter values and attach it to the map's clipping area.*/
         arcGISMapComponent.EnableExtent = true;
 
-        var extentCenter = new Esri.GameEngine.Geometry.ArcGISPoint(-112.0676939844843, 33.452266887500514, 20000, ArcGISSpatialReference.WGS84());
+        var extentCenter = new Esri.GameEngine.Geometry.ArcGISPoint(-112.0676939844843, 33.452266887500514, 25000, ArcGISSpatialReference.WGS84());
         var extent = new ArcGISExtentCircle(extentCenter, 40000);
 
         arcGISMap.ClippingArea = extent;

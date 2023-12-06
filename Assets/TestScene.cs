@@ -11,7 +11,7 @@ using UnityEditor;
 using UnityEngine;
 using System;
 
-// [ExecuteAlways]
+[ExecuteAlways]
 
 public class TestScene : MonoBehaviour
 {
